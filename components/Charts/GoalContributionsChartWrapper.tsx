@@ -4,7 +4,6 @@ import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { goalContributions } from '@/data/goalContributions';
 
 import GoalContributionsChart from '@/components/Charts/GoalContributionsChart';
-import ButtonFilter from '@/components/Shared/ButtonFilter';
 
 let keys = goalContributions.map((row) => row.player);
 keys = [...new Set(keys)];
@@ -36,6 +35,7 @@ const GoalContributionsChartWrapper = () => {
               data={goalContributions.filter((row) => row.player === active)}
               width={width}
               height={height}
+              margin={{ top: 40, bottom: 30, left: 50, right: 20 }}
             />
           )}
         </ParentSize>

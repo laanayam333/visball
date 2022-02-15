@@ -27,7 +27,7 @@ export default function GoalContributionsChart({
   data,
   height,
   width,
-  margin = { top: 40, bottom: 30, left: 50, right: 20 },
+  margin,
 }: IProps) {
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
