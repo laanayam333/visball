@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { extent, format } from 'd3';
 import { motion } from 'framer-motion';
 import { AreaStack, Line, Bar } from '@visx/shape';
@@ -7,24 +7,12 @@ import { AxisBottom, AxisLeft, Axis } from '@visx/axis';
 import { LegendOrdinal, LegendLabel, LegendItem } from '@visx/legend';
 import { localPoint } from '@visx/event';
 import { useTooltip, TooltipWithBounds, defaultStyles } from '@visx/tooltip';
-
-interface IData {
-  player: string;
-  club: string;
-  year: number;
-  season: string;
-  teamGoals: number;
-  playerGoals: number;
-  playerAssists: number;
-  playerGoalsPercentage: number;
-  playerAssistsPercentage: number;
-}
-
-interface IProps {
-  data: IData[];
-  height: number;
-  width: number;
-}
+import { SeriesPoint } from '@visx/shape/lib/types';
+import {
+  IProps,
+  TooltipData,
+  IData,
+} from '@/interfaces/GoalContributionInterfaces';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -55,9 +43,9 @@ export default function GoalContributionsChart({
     } as const);
 
   // create accessor functions
-  const getX = (d) => d.year;
-  const getY0 = (d) => d[0] / 100;
-  const getY1 = (d) => d[1] / 100;
+  const getX = (d: IData): number => d.year;
+  const getY0 = (d: SeriesPoint<IData>): number => d[0] / 100;
+  const getY1 = (d: SeriesPoint<IData>): number => d[1] / 100;
 
   const keys = Object.keys(data[0]).filter(
     (k) =>
@@ -73,7 +61,7 @@ export default function GoalContributionsChart({
   // create scales
   const xScale = scaleLinear({
     range: [margin.left, innerWidth + margin.left],
-    domain: extent(data, getX),
+    domain: extent(data, getX) as [number, number],
   });
 
   const yScale = scaleLinear({
@@ -91,7 +79,7 @@ export default function GoalContributionsChart({
     tooltipData,
     tooltipTop = 0,
     tooltipLeft = 0,
-  } = useTooltip();
+  } = useTooltip<TooltipData>();
 
   // event handler
   const handleTooltip = useCallback(
