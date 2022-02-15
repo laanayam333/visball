@@ -1,12 +1,9 @@
 //! IMPORTS
 //* dependencies
-import { useState, ChangeEvent } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import ParentSize from '@visx/responsive/lib/components/ParentSize';
 
 //* utils
-import { mostGoalsContributions } from '@/data/goalContributions';
 import GoalContributionsChartWrapper from '@/components/Charts/GoalContributionsChartWrapper';
 
 //* constants
