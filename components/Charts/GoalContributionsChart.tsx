@@ -149,6 +149,7 @@ export default function GoalContributionsChart({
             stacks.map((stack) => (
               <motion.path
                 initial={false}
+                // @ts-ignore: Unreachable code error
                 animate={{ d: path(stack) }}
                 key={`stack-${stack.key}`}
                 stroke={fillScale(stack.key)}
